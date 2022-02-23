@@ -1,0 +1,29 @@
+name: Update data
+
+on:
+  schedule:
+    - cron: "0 5 * * *"
+
+jobs:
+  execute:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+        
+      - name: Install npm packages
+        run: npm i
+        
+      - name: Update local files
+        run: node index.mjs
+
+      - name: Commit files and push
+        run: |
+          git config user.email "github-actions@github.com"
+          git config user.name "github-actions"
+          git commit -m "github actions data update" -a
+          git push
