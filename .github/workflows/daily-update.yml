@@ -26,5 +26,6 @@ jobs:
         run: |
           git config user.email "github-actions@github.com"
           git config user.name "github-actions"
-          git commit -m "github actions data update" -a
+          git add .
+          git commit -m "github actions data update"
           git push
